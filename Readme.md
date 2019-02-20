@@ -1,9 +1,7 @@
 # Личный проект «Большое путешествие» [![Build status][travis-image]][travis-url]
 
-
 * Студент: [Наталья Майстренко](https://up.htmlacademy.ru/ecmascript/8/user/247943).
 * Наставник: [Дмитрий Мирошниченко](https://htmlacademy.ru/profile/id591417).
-
 
 ---
 

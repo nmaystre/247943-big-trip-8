@@ -1,5 +1,27 @@
 import createFilter from './createFilter';
+import createPoint from './createPoint';
+import { getRandomNumber } from './util';
 
-createFilter();
-console.log('test qqqwqwqw11');
+const filtersContainer = document.querySelector(`.trip-filter`);
+filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Everything`, true));
+filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Future`, false));
+filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Past`, false));
 
+const renderPoints = (dist, number = 7) => {
+  const points = new Array(number)
+    .fill()
+    .map(createPoint);
+  dist.insertAdjacentHTML(`beforeend`, points.join(``));
+};
+
+const tasksContainer = document.querySelector(`.trip-day__items`);
+renderPoints(tasksContainer);
+
+filtersContainer.addEventListener(`click`, (evt) => {
+  if (evt.target.classList.contains(`trip-filter__item`)) {
+    evt.stopPropagation();
+    const randomNumber = Math.round(getRandomNumber(0, 10));
+    tasksContainer.innerHTML = ``;
+    renderPoints(tasksContainer, randomNumber);
+  }
+});

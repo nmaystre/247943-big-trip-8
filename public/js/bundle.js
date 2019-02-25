@@ -86,14 +86,110 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/createFilter.js":
+/*!*****************************!*\
+  !*** ./src/createFilter.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ((caption, checked = false) => `
+<input
+  type="radio"
+  id="filter-${caption}"
+  name="filter"
+  value="${caption}"
+  ${checked ? `checked` : ``}/>
+<label
+  class="trip-filter__item"
+  for="filter-${caption}">
+  ${caption}</span>
+</label>`);
+
+/***/ }),
+
+/***/ "./src/createPoint.js":
+/*!****************************!*\
+  !*** ./src/createPoint.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (() => `
+<article class="trip-point">
+  <i class="trip-icon">🏨</i>
+  <h3 class="trip-point__title">Check into a hotel</h3>
+  <p class="trip-point__schedule">
+    <span class="trip-point__timetable">10:00&nbsp;&mdash; 11:00</span>
+    <span class="trip-point__duration">1h 30m</span>
+  </p>
+  <p class="trip-point__price">&euro;&nbsp;20</p>
+  <ul class="trip-point__offers">
+    <li>
+      <button class="trip-point__offer">Add breakfast +&euro;&nbsp;20</button>
+    </li>
+  </ul>
+</article>`);
+
+/***/ }),
+
 /***/ "./src/main.js":
 /*!*********************!*\
   !*** ./src/main.js ***!
   \*********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-console.log('232323');
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _createFilter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createFilter */ "./src/createFilter.js");
+/* harmony import */ var _createPoint__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createPoint */ "./src/createPoint.js");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./util */ "./src/util.js");
+
+
+
+const filtersContainer = document.querySelector(`.trip-filter`);
+filtersContainer.insertAdjacentHTML(`beforeend`, Object(_createFilter__WEBPACK_IMPORTED_MODULE_0__["default"])(`Everything`, true));
+filtersContainer.insertAdjacentHTML(`beforeend`, Object(_createFilter__WEBPACK_IMPORTED_MODULE_0__["default"])(`Future`, false));
+filtersContainer.insertAdjacentHTML(`beforeend`, Object(_createFilter__WEBPACK_IMPORTED_MODULE_0__["default"])(`Past`, false));
+
+const renderPoints = (dist, number = 7) => {
+  const points = new Array(number).fill().map(_createPoint__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  dist.insertAdjacentHTML(`beforeend`, points.join(``));
+};
+
+const tasksContainer = document.querySelector(`.trip-day__items`);
+renderPoints(tasksContainer);
+filtersContainer.addEventListener(`click`, evt => {
+  if (evt.target.classList.contains(`trip-filter__item`)) {
+    evt.stopPropagation();
+    const randomNumber = Math.round(Object(_util__WEBPACK_IMPORTED_MODULE_2__["getRandomNumber"])(0, 10));
+    tasksContainer.innerHTML = ``;
+    renderPoints(tasksContainer, randomNumber);
+  }
+});
+
+/***/ }),
+
+/***/ "./src/util.js":
+/*!*********************!*\
+  !*** ./src/util.js ***!
+  \*********************/
+/*! exports provided: getRandomNumber */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRandomNumber", function() { return getRandomNumber; });
+const getRandomNumber = (min, max) => {
+  return Math.random() * (max - min) + min;
+};
+
+
 
 /***/ })
 

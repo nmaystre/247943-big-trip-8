@@ -1,6 +1,6 @@
 import createFilter from './createFilter';
 import createPoint from './createPoint';
-import { getRandomNumber } from './util';
+import {getRandomNumber} from './util';
 
 const filtersContainer = document.querySelector(`.trip-filter`);
 filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Everything`, true));

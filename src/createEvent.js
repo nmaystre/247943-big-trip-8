@@ -1,9 +1,9 @@
 import eventData from './data';
 
-const createEvent = (eventData) => `
+const createEvent = (data) => `
 <article class="trip-point">
   <i class="trip-icon">🏨</i>
-  <h3 class="trip-point__title">${eventData.type.title}</h3>
+  <h3 class="trip-point__title">${data.type.title}</h3>
   <p class="trip-point__schedule">
     <span class="trip-point__timetable">10:00&nbsp;&mdash; 11:00</span>
     <span class="trip-point__duration">1h 30m</span>

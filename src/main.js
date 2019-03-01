@@ -1,5 +1,6 @@
 import createFilter from './createFilter';
-import {eventData, createEvent} from './createEvent';
+import {createEvent} from './createEvent';
+import {eventData} from './data';
 import {getRandomNumber} from './util';
 
 const filtersContainer = document.querySelector(`.trip-filter`);

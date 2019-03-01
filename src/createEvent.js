@@ -1,6 +1,3 @@
-import eventData from './data';
-
-const currentData = eventData();
 
 const createEvent = (currentData) =>
   `<article class="trip-point">

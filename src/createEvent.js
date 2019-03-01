@@ -1,7 +1,7 @@
 import eventData from './data';
 
-const createEvent = (data) => `
-<article class="trip-point">
+const createEvent = (data) => (
+  `<article class="trip-point">
   <i class="trip-icon">🏨</i>
   <h3 class="trip-point__title">${data.type.title}</h3>
   <p class="trip-point__schedule">
@@ -14,6 +14,6 @@ const createEvent = (data) => `
       <button class="trip-point__offer">Add breakfast +&euro;&nbsp;20</button>
     </li>
   </ul>
-</article>`;
+</article>`);
 
 export default createEvent;

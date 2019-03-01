@@ -1,5 +1,5 @@
 import createFilter from './createFilter';
-import createPoint from './createPoint';
+import {eventData, createEvent} from './createEvent';
 import {getRandomNumber} from './util';
 
 const filtersContainer = document.querySelector(`.trip-filter`);
@@ -10,7 +10,7 @@ filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Past`, false));
 const renderPoints = (dist, number = 7) => {
   const points = new Array(number)
     .fill()
-    .map(createPoint);
+    .map(createEvent(eventData));
   dist.insertAdjacentHTML(`beforeend`, points.join(``));
 };
 

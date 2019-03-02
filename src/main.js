@@ -1,5 +1,5 @@
 import createFilter from './createFilter';
-import {createEvent} from './createEvent';
+import createEvent from './createEvent';
 import {eventData} from './data';
 import {getRandomNumber} from './util';
 
@@ -10,8 +10,8 @@ filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Past`, false));
 
 const renderPoints = (dist, number = 7) => {
   const points = new Array(number)
-    .fill()
-    .map(createEvent(eventData));
+    .fill(``)
+    .map(() => createEvent(eventData()));
   dist.insertAdjacentHTML(`beforeend`, points.join(``));
 };
 

@@ -1,4 +1,8 @@
 import {getRandomNumber, getSeveralItems} from './util.js';
+import moment from 'moment';
+
+const date = moment();
+console.log(date);
 
 const eventTypeData = [
   {
@@ -84,8 +88,8 @@ const getEventPicture = () => {
   return `//picsum.photos/100/100?r=${Math.random()}`;
 };
 const getEventOffers = () => {
-  const array = getSeveralItems(eventOffersData, getRandomNumber(2, 2));
-  return array.map((element) => `<li><button class="trip-point__offer">${element} + &euro;&nbsp;20</button></li>`).join(``);
+  const array = getSeveralItems(eventOffersData, getRandomNumber(0, 2));
+  return array.map((element) => `<li><button class="trip-point__offer">${element} + &euro;&nbsp;${Math.floor(getRandomNumber(10, 30))}</button></li>`).join(``);
 };
 const getEventDescription = () => {
   return getSeveralItems(eventDescriptionData, getRandomNumber(1, 3)).join(` `);

@@ -1,8 +1,4 @@
-import {getRandomNumber, getSeveralItems} from './util.js';
-import moment from 'moment';
-
-const date = moment();
-console.log(date);
+import {getRandomNumber, getSeveralItems, getRandomTime} from './util.js';
 
 const eventTypeData = [
   {
@@ -94,8 +90,16 @@ const getEventOffers = () => {
 const getEventDescription = () => {
   return getSeveralItems(eventDescriptionData, getRandomNumber(1, 3)).join(` `);
 };
-const getEventDay = () => {
-  return Date.now() + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000;
+
+const getEventTimings = () => {
+  const start = getRandomTime();
+  const duration = Math.floor(getRandomNumber(0, 600));
+  const end = start.clone().add(duration, `minutes`);
+  return {
+    start: start.format(`hh:mm`),
+    duration: Math.floor(duration / 60) + `h ` + (duration % 60) + `m`,
+    end: end.format(`hh:mm`)
+  };
 };
 
 const eventData = () => ({
@@ -104,10 +108,8 @@ const eventData = () => ({
   picture: getEventPicture(),
   offers: getEventOffers(),
   description: getEventDescription(),
-  day: getEventDay(),
-  timeFrom: `0`,
-  timeTo: `0`,
-  timeTotal: `0`,
+  day: `add later`,
+  time: getEventTimings(),
   price: Math.floor(getRandomNumber(0, 100))
 });
 

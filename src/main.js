@@ -8,8 +8,6 @@ filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Everything`, true
 filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Future`, false));
 filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Past`, false));
 
-console.log(eventData());
-
 const renderPoints = (dist, number = 7) => {
   const points = new Array(number)
     .fill(``)

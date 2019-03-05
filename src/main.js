@@ -1,5 +1,6 @@
 import createFilter from './createFilter';
-import createPoint from './createPoint';
+import createEvent from './createEvent';
+import {eventData} from './dataEvent';
 import {getRandomNumber} from './util';
 
 const filtersContainer = document.querySelector(`.trip-filter`);
@@ -9,8 +10,9 @@ filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Past`, false));
 
 const renderPoints = (dist, number = 7) => {
   const points = new Array(number)
-    .fill()
-    .map(createPoint);
+    .fill(``)
+    .map(() => createEvent(eventData()));
+  dist.innerHTML = ``;
   dist.insertAdjacentHTML(`beforeend`, points.join(``));
 };
 
@@ -21,7 +23,6 @@ filtersContainer.addEventListener(`click`, (evt) => {
   if (evt.target.classList.contains(`trip-filter__item`)) {
     evt.stopPropagation();
     const randomNumber = Math.round(getRandomNumber(0, 10));
-    tasksContainer.innerHTML = ``;
     renderPoints(tasksContainer, randomNumber);
   }
 });

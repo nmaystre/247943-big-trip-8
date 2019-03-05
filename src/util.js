@@ -6,8 +6,12 @@ const getRandomNumber = (min, max) => {
 
 const getSeveralItems = (sourceArray, neededElements) => {
   const result = [];
+  const newArray = sourceArray.slice();
+
   for (let i = 0; i < neededElements; i++) {
-    result.push(sourceArray[Math.floor(getRandomNumber(0, sourceArray.length))]);
+    let randomItem = newArray[Math.floor(getRandomNumber(0, newArray.length))];
+    result.push(randomItem);
+    newArray.splice(randomItem, 1);
   }
   return result;
 };

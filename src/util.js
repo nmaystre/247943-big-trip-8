@@ -7,7 +7,7 @@ const getRandomNumber = (min, max) => {
 const getSeveralItems = (sourceArray, neededElements) => {
   const result = [];
   for (let i = 0; i < neededElements; i++) {
-    result.push(sourceArray[Math.floor(Math.random() * sourceArray.length)]);
+    result.push(sourceArray[Math.floor(getRandomNumber(0, sourceArray.length))]);
   }
   return result;
 };

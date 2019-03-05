@@ -75,10 +75,10 @@ const eventDescriptionData = [
 ];
 
 const getEventDataType = () => {
-  return eventTypeData[Math.floor(Math.random() * 10)];
+  return eventTypeData[Math.floor(getRandomNumber(1, eventTypeData.length))];
 };
 const getEventCityType = () => {
-  return [...eventCityData].map((it) => `${it}`).join(` `);
+  return [...eventCityData].join(` `);
 };
 const getEventPicture = () => {
   return `//picsum.photos/100/100?r=${Math.random()}`;

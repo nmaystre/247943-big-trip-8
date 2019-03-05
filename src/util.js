@@ -13,8 +13,7 @@ const getSeveralItems = (sourceArray, neededElements) => {
 };
 
 const getRandomTime = () => {
-  const result = moment().hour(getRandomNumber(0, 24)).minute(getRandomNumber(0, 59));
-  return result;
+  return moment().hour(getRandomNumber(0, 24)).minute(getRandomNumber(0, 59));
 };
 
 export {getRandomNumber, getSeveralItems, getRandomTime};

@@ -1,6 +1,6 @@
 import {
   createEditEvent
-} from './createEvent';
+} from './createEditEvent';
 
 class EditEvent {
 
@@ -173,4 +173,6 @@ class EditEvent {
   }
 }
 
-export default EditEvent;
+export {
+  EditEvent
+};

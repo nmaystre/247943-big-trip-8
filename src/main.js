@@ -18,15 +18,17 @@ filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Past`, false));
 //   dist.insertAdjacentHTML(`beforeend`, points.join(``));
 // };
 
+const eventDataGenerated = eventData();
 const eventContainer = document.querySelector(`.trip-day__items`);
-const eventComponent = new Event(eventData());
-const editEventComponent = new EditEvent(eventData());
+const eventComponent = new Event(eventDataGenerated);
+// const editEventComponent = new EditEvent(eventData());
 
 eventContainer.appendChild(eventComponent.render());
 
-eventComponent.onEdit = () => {
-  eventComponent.appendChild(editEventComponent.render());
-};
+
+// eventComponent.onEdit = () => {
+//   eventComponent.appendChild(editEventComponent.render());
+// };
 
 
 // renderPoints(tasksContainer);

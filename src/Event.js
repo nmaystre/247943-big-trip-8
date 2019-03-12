@@ -5,9 +5,6 @@ import {
 import {
   eventData
 } from './dataEvent';
-// import {
-//   EditEvent
-// } from './EditEvent';
 
 class Event {
   constructor(data) {
@@ -25,9 +22,18 @@ class Event {
     };
   }
 
-  _onEditTitleClick() {
+  _onPointClick() {
     this._state.isEdit = !this._state.isEdit;
     this.update();
+    console.log('2121');
+  }
+
+  get element() {
+    return this._element;
+  }
+
+  set onEdit(fn) {
+    this._onEdit = fn;
   }
 
   get template() {
@@ -46,10 +52,7 @@ class Event {
   }
 
   bind() {
-    // не понимаю что тут нужно прибиндидить, ведь клик можеть быть по всей карточке. Биндить клик к этой карточке?
-    // this._element.addEventListener(`click`, this.bind(this));
-    this._element.querySelector(`.trip-point__title`)
-      .addEventListener(`click`, this._onEditTitleClick.bind(this));
+    this._element.addEventListener(`click`, this._onPointClick.bind(this));
   }
 
   render() {
@@ -60,12 +63,10 @@ class Event {
 
   update() {
     if (this._state.isEdit) {
-      this._element.classList.add(`trip-point--edit`);
-      const tasksContainer = document.querySelector(`.trip-day__items`);
-      const firstEvent = new Event(eventData());
-      firstEvent.render(tasksContainer);
+      return this._element.classList.add(`trip-point--edit`);
+    } else {
+      return this._element.classList.remove(`trip-point--edit`);
     }
-    return this._element.classList.remove(`trip-point--edit`);
   }
 
   unbind() {

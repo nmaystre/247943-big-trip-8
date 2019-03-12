@@ -29,7 +29,6 @@ eventContainer.appendChild(eventComponent.render());
 
 eventComponent.onEdit = () => {
   editEventComponent.render();
-  console.log(eventComponent.element);
 
   // почему replace child пишет что eventComponent.element не является ребенком  eventContainer?
   // eventContainer.replaceChild(eventComponent.element, editEventComponent.element);

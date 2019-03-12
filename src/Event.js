@@ -2,10 +2,6 @@ import {
   createEvent
 } from './createEvent';
 
-import {
-  eventData
-} from './dataEvent';
-
 class Event {
   constructor(data) {
     this._icon = data.type.icon;

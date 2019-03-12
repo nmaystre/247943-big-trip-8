@@ -18,14 +18,16 @@ class Event {
 
     this._element = null;
     this._state = {
-      isEdit: false
+      // isEdit: false
     };
+
+    this._onEdit = null;
   }
 
   _onPointClick() {
-    this._state.isEdit = !this._state.isEdit;
-    this.update();
-    console.log('2121');
+    // this._state.isEdit = !this._state.isEdit;
+    // this.update();
+    return typeof this._onEdit === `function` && this._onEdit();
   }
 
   get element() {

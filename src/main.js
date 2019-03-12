@@ -1,6 +1,8 @@
 import createFilter from './createFilter';
 import Event from './Event';
-import EditEvent from './EditEvent';
+import {
+  EditEvent
+} from './EditEvent';
 import {
   eventData
 } from './dataEvent';
@@ -21,10 +23,21 @@ filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Past`, false));
 const eventDataGenerated = eventData();
 const eventContainer = document.querySelector(`.trip-day__items`);
 const eventComponent = new Event(eventDataGenerated);
-// const editEventComponent = new EditEvent(eventData());
+const editEventComponent = new EditEvent(eventDataGenerated);
 
 eventContainer.appendChild(eventComponent.render());
 
+eventComponent.onEdit = () => {
+  editEventComponent.render();
+  console.log(eventComponent.element);
+
+  // почему replace child пишет что eventComponent.element не является ребенком  eventContainer?
+  // eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
+
+  eventContainer.removeChild(eventComponent.element);
+  eventContainer.appendChild(editEventComponent.element);
+  eventComponent.unrender();
+};
 
 // eventComponent.onEdit = () => {
 //   eventComponent.appendChild(editEventComponent.render());

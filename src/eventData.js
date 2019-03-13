@@ -1,7 +1,10 @@
-import {getRandomNumber, getSeveralItems, getRandomTime} from './util.js';
+import {
+  getRandomNumber,
+  getSeveralItems,
+  getRandomTime
+} from './util.js';
 
-const eventTypeData = [
-  {
+const eventTypeData = [{
     title: `Taxi`,
     icon: `🚕`
   },
@@ -83,10 +86,34 @@ const getEventCityType = () => {
 const getEventPicture = () => {
   return `//picsum.photos/100/100?r=${Math.random()}`;
 };
-const getEventOffers = () => {
-  const array = getSeveralItems(eventOffersData, getRandomNumber(0, 2));
-  return array.map((element) => `<li><button class="trip-point__offer">${element} + &euro;&nbsp;${Math.floor(getRandomNumber(10, 30))}</button></li>`).join(``);
+const getOffers = () => {
+  const amount = getRandomNumber(0, 2);
+  const offers = getSeveralItems(eventOffersData, amount);
+  const array = [];
+  for (let offer of offers) {
+    let item = {
+      title: offer,
+      price: Math.floor(getRandomNumber(10, 30)),
+      id: offer.replace(/ /g, `-`).toLowerCase()
+    };
+    array.push(item);
+  }
+  return array;
 };
+
+const offersArray = getOffers();
+
+const getEventOffers = () => {
+  return offersArray.map((element) => `<li><button class="trip-point__offer">${element.title} + &euro;&nbsp;${element.price}</button></li>`).join(``);
+};
+const getEditEventOffers = () => {
+  return offersArray.map((element) => `
+  <input class="point__offers-input visually-hidden" type="checkbox" id="${element.id}" name="offer" value="${element.id}">
+  <label for="${element.id}" class="point__offers-label">
+    <span class="point__offer-service">${element.title}</span> + €<span class="point__offer-price">${element.price}</span>
+  </label>`).join(``);
+};
+
 const getEventDescription = () => {
   return getSeveralItems(eventDescriptionData, getRandomNumber(1, 3)).join(` `);
 };
@@ -107,12 +134,13 @@ const eventData = () => ({
   city: getEventCityType(),
   picture: getEventPicture(),
   offers: getEventOffers(),
+  offersEdit: getEditEventOffers(),
   description: getEventDescription(),
   day: `add later`,
   time: getEventTimings(),
   price: Math.floor(getRandomNumber(0, 100))
 });
 
-export {eventData};
-
-
+export {
+  eventData
+};

@@ -11,19 +11,9 @@ class Event {
     this._durationTime = data.time.duration;
     this._price = data.price;
     this._offers = data.offers;
-
+    this._offersEdit = data.offersEdit;
     this._element = null;
-    this._state = {
-      // isEdit: false
-    };
-
-    this._onEdit = null;
-  }
-
-  _onPointClick() {
-    // this._state.isEdit = !this._state.isEdit;
-    // this.update();
-    return typeof this._onEdit === `function` && this._onEdit();
+    this._state = {};
   }
 
   get element() {
@@ -50,7 +40,7 @@ class Event {
   }
 
   bind() {
-    this._element.addEventListener(`click`, this._onPointClick.bind(this));
+    this._element.addEventListener(`click`, this._onEdit.bind(this));
   }
 
   render() {

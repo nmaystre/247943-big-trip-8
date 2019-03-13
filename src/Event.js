@@ -4,6 +4,7 @@ import {
 
 class Event {
   constructor(data) {
+    this._data = data;
     this._icon = data.type.icon;
     this._title = data.type.title;
     this._startTime = data.time.start;
@@ -40,7 +41,7 @@ class Event {
   }
 
   bind() {
-    this._element.addEventListener(`click`, this._onEdit.bind(this));
+    this._element.addEventListener(`click`, this._onEdit.bind(this, this._data));
   }
 
   render() {

@@ -13,30 +13,24 @@ filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Past`, false));
 const eventDataGenerated = eventData();
 const eventContainer = document.querySelector(`.trip-day__items`);
 const eventComponent = new Event(eventDataGenerated);
-const editEventComponent = new EditEvent(eventDataGenerated);
 
-eventComponent.onEdit = () => {
-  editEventComponent.onSave = (e) => {
-    e.preventDefault();
+eventComponent.onEdit = (data) => {
+  const editEventComponent = new EditEvent(data);
+
+  editEventComponent.onSave = (evt) => {
+    evt.preventDefault();
+    eventComponent.render();
+    eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
+    editEventComponent.unrender();
+  };
+
+  editEventComponent.onReset = (evt) => {
+    evt.preventDefault();
+    eventContainer.removeChild(editEventComponent.element);
+    editEventComponent.unrender();
   };
   editEventComponent.render();
   eventContainer.replaceChild(editEventComponent.element, eventComponent.element);
-  eventComponent.unrender();
-};
-
-editEventComponent.onSave = (e) => {
-  e.preventDefault();
-  console.log('фыфыфыфы');
-  eventComponent.render();
-  eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
-  editEventComponent.unrender();
-};
-
-editEventComponent.onReset = (e) => {
-  e.preventDefault();
-  console.log('223');
-  eventContainer.removeChild(editEventComponent.element);
-  editEventComponent.unrender();
 };
 
 eventContainer.appendChild(eventComponent.render());

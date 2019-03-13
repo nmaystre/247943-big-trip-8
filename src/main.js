@@ -19,6 +19,9 @@ eventComponent.onEdit = () => {
   editEventComponent.onSave = (e) => {
     e.preventDefault();
   };
+  // editEventComponent.onReset = (e) => {
+  //   e.preventDefault();
+  // };
   editEventComponent.render();
   eventContainer.replaceChild(editEventComponent.element, eventComponent.element);
   eventComponent.unrender();
@@ -26,10 +29,16 @@ eventComponent.onEdit = () => {
 
 eventContainer.appendChild(eventComponent.render());
 
-
 editEventComponent.onSave = (e) => {
   e.preventDefault();
   eventComponent.render();
   eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
+  editEventComponent.unrender();
+};
+
+editEventComponent.onReset = (e) => {
+  e.preventDefault();
+  console.log('223');
+  eventContainer.removeChild(editEventComponent.element);
   editEventComponent.unrender();
 };

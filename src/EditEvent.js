@@ -23,6 +23,10 @@ class EditEvent {
     this._onSave = fn;
   }
 
+  set onReset(fn) {
+    this._onReset = fn;
+  }
+
   get element() {
     return this._element;
   }
@@ -139,8 +143,11 @@ class EditEvent {
   }
 
   bind() {
+
+    this._element.querySelector(`.point__button[type='reset']`)
+      .addEventListener(`click`, this._onReset.bind(this));
     this._element.querySelector(`.point__button--save`)
-      .addEventListener(`submit`, this._onSave.bind(this));
+      .addEventListener(`click`, this._onSave.bind(this));
   }
 
   unbind() {

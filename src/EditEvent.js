@@ -17,13 +17,13 @@ class EditEvent {
     this._picture = data.picture;
 
     this._element = null;
-    this._onSave = null;
+    // this._onSave = null;
   }
 
-  _onSaveButtonClick(evt) {
-    evt.preventDefault();
-    return typeof this._onSave === `function` && this._onSave();
-  }
+  // _onSaveButtonClick(evt) {
+  //   evt.preventDefault();
+  //   return typeof this._onSave === `function` && this._onSave();
+  // }
 
   set onSave(fn) {
     this._onSave = fn;
@@ -79,7 +79,7 @@ class EditEvent {
                   </div>
 
                   <div class="point__destination-wrap">
-                    <label class="point__destination-label" for="destination">Flight to</label>
+                    <label class="point__destination-label" for="destination">${this._title} to</label>
                     <input class="point__destination-input" list="destination-select" id="destination" value="${this._city}" name="destination">
                     <datalist id="destination-select">
                       <option value="airport"></option>
@@ -165,7 +165,7 @@ class EditEvent {
 
   bind() {
     this._element.querySelector(`.point__button--save`)
-      .addEventListener(`submit`, this._onSaveButtonClick.bind(this));
+      .addEventListener(`submit`, this._onSave.bind(this));
   }
 
   unbind() {
@@ -173,6 +173,4 @@ class EditEvent {
   }
 }
 
-export {
-  EditEvent
-};
+export default EditEvent;

@@ -1,8 +1,6 @@
 import createFilter from './createFilter';
 import Event from './Event';
-import {
-  EditEvent
-} from './EditEvent';
+import EditEvent from './EditEvent';
 import {
   eventData
 } from './dataEvent';
@@ -28,14 +26,16 @@ const editEventComponent = new EditEvent(eventDataGenerated);
 eventContainer.appendChild(eventComponent.render());
 
 eventComponent.onEdit = () => {
+  editEventComponent.onSave = () => {};
   editEventComponent.render();
-
-  // почему replace child пишет что eventComponent.element не является ребенком  eventContainer?
-  // eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
-
-  eventContainer.removeChild(eventComponent.element);
-  eventContainer.appendChild(editEventComponent.element);
+  eventContainer.replaceChild(editEventComponent.element, eventComponent.element);
   eventComponent.unrender();
+};
+
+editEventComponent.onSave = () => {
+  eventComponent.render();
+  eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
+  editEventComponent.unrender();
 };
 
 // eventComponent.onEdit = () => {

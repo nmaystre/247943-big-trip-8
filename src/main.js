@@ -1,28 +1,36 @@
 import createFilter from './createFilter';
-import createEvent from './createEvent';
-import {eventData} from './dataEvent';
-import {getRandomNumber} from './util';
+import Event from './Event';
+import EditEvent from './EditEvent';
+import {
+  eventData
+} from './eventData';
 
 const filtersContainer = document.querySelector(`.trip-filter`);
 filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Everything`, true));
 filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Future`, false));
 filtersContainer.insertAdjacentHTML(`beforeend`, createFilter(`Past`, false));
 
-const renderPoints = (dist, number = 7) => {
-  const points = new Array(number)
-    .fill(``)
-    .map(() => createEvent(eventData()));
-  dist.innerHTML = ``;
-  dist.insertAdjacentHTML(`beforeend`, points.join(``));
+const eventDataGenerated = eventData();
+const eventContainer = document.querySelector(`.trip-day__items`);
+const eventComponent = new Event(eventDataGenerated);
+
+eventComponent.onEdit = (data) => {
+  const editEventComponent = new EditEvent(data);
+
+  editEventComponent.onSave = (evt) => {
+    evt.preventDefault();
+    eventComponent.render();
+    eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
+    editEventComponent.unrender();
+  };
+
+  editEventComponent.onReset = (evt) => {
+    evt.preventDefault();
+    eventContainer.removeChild(editEventComponent.element);
+    editEventComponent.unrender();
+  };
+  editEventComponent.render();
+  eventContainer.replaceChild(editEventComponent.element, eventComponent.element);
 };
 
-const tasksContainer = document.querySelector(`.trip-day__items`);
-renderPoints(tasksContainer);
-
-filtersContainer.addEventListener(`click`, (evt) => {
-  if (evt.target.classList.contains(`trip-filter__item`)) {
-    evt.stopPropagation();
-    const randomNumber = Math.round(getRandomNumber(0, 10));
-    renderPoints(tasksContainer, randomNumber);
-  }
-});
+eventContainer.appendChild(eventComponent.render());

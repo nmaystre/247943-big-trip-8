@@ -143,7 +143,6 @@ class EditEvent {
   }
 
   bind() {
-
     this._element.querySelector(`.point__button[type='reset']`)
       .addEventListener(`click`, this._onReset.bind(this));
     this._element.querySelector(`.point__button--save`)

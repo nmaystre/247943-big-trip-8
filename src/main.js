@@ -19,18 +19,14 @@ eventComponent.onEdit = () => {
   editEventComponent.onSave = (e) => {
     e.preventDefault();
   };
-  // editEventComponent.onReset = (e) => {
-  //   e.preventDefault();
-  // };
   editEventComponent.render();
   eventContainer.replaceChild(editEventComponent.element, eventComponent.element);
   eventComponent.unrender();
 };
 
-eventContainer.appendChild(eventComponent.render());
-
 editEventComponent.onSave = (e) => {
   e.preventDefault();
+  console.log('фыфыфыфы');
   eventComponent.render();
   eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
   editEventComponent.unrender();
@@ -42,3 +38,5 @@ editEventComponent.onReset = (e) => {
   eventContainer.removeChild(editEventComponent.element);
   editEventComponent.unrender();
 };
+
+eventContainer.appendChild(eventComponent.render());

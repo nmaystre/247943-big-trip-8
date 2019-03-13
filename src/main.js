@@ -15,9 +15,6 @@ const eventContainer = document.querySelector(`.trip-day__items`);
 const eventComponent = new Event(eventDataGenerated);
 const editEventComponent = new EditEvent(eventDataGenerated);
 
-eventComponent.onEdit = () => {};
-eventContainer.appendChild(eventComponent.render());
-
 eventComponent.onEdit = () => {
   editEventComponent.onSave = (e) => {
     e.preventDefault();
@@ -26,6 +23,9 @@ eventComponent.onEdit = () => {
   eventContainer.replaceChild(editEventComponent.element, eventComponent.element);
   eventComponent.unrender();
 };
+
+eventContainer.appendChild(eventComponent.render());
+
 
 editEventComponent.onSave = (e) => {
   e.preventDefault();

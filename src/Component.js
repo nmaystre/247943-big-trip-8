@@ -1,7 +1,3 @@
-import {
-  createEvent
-} from './createEvent';
-
 class Component {
   constructor() {
     if (new.target === Component) {

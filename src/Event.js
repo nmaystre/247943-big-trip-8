@@ -20,6 +20,7 @@ class Event extends Component {
 
   set onEdit(fn) {
     this._onEdit = fn;
+    this._bindedEditedElement = this._onEdit.bind(this);
   }
 
   get template() {
@@ -37,14 +38,19 @@ class Event extends Component {
             </article>`;
   }
 
+  render() {
+    this._element = createEvent(this.template);
+    this.bind();
+    return this._element;
+  }
+
   bind() {
-    this._element.addEventListener(`click`, this._onEdit.bind(this, this._data));
+    this._element.addEventListener(`click`, this._bindedEditedElement);
   }
 
   unbind() {
-    // Удаление обработчиков
+    this._element.removeEventListener(`click`, this._bindedEditedElement);
   }
-
 
   update() {
     if (this._state.isEdit) {

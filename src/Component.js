@@ -20,17 +20,12 @@ class Component {
     throw new Error(`You have to define template.`);
   }
 
-  render() {
-    this._element = createEvent(this.template);
-    this.bind();
-    return this._element;
-  }
+  render() {}
 
-  bind() {
-
-  }
+  bind() {}
 
   unbind() {}
+
 
   unrender() {
     this.unbind();

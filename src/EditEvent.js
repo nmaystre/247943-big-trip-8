@@ -2,21 +2,22 @@ import {
   createEditEvent
 } from './createEditEvent';
 
-class EditEvent {
+import Component from './Component';
+
+
+class EditEvent extends Component {
 
   constructor(data) {
+    super();
     this._icon = data.type.icon;
     this._title = data.type.title;
     this._city = data.city;
     this._startTime = data.time.start;
     this._endTime = data.time.end;
-    this._durationTime = data.time.duration;
     this._price = data.price;
-    this._offers = data.offers;
     this._offersEdit = data.offersEdit;
     this._description = data.description;
     this._picture = data.picture;
-    this._element = null;
   }
 
   set onSave(fn) {
@@ -25,10 +26,6 @@ class EditEvent {
 
   set onReset(fn) {
     this._onReset = fn;
-  }
-
-  get element() {
-    return this._element;
   }
 
   get template() {
@@ -129,17 +126,6 @@ class EditEvent {
                 </section>
               </form>
             </article>`;
-  }
-
-  render() {
-    this._element = createEditEvent(this.template);
-    this.bind();
-    return this._element;
-  }
-
-  unrender() {
-    this.unbind();
-    this._element = null;
   }
 
   bind() {

@@ -2,8 +2,11 @@ import {
   createEvent
 } from './createEvent';
 
-class Event {
+import Component from './Component';
+
+class Event extends Component {
   constructor(data) {
+    super();
     this._data = data;
     this._icon = data.type.icon;
     this._title = data.type.title;
@@ -13,12 +16,6 @@ class Event {
     this._price = data.price;
     this._offers = data.offers;
     this._offersEdit = data.offersEdit;
-    this._element = null;
-    this._state = {};
-  }
-
-  get element() {
-    return this._element;
   }
 
   set onEdit(fn) {
@@ -44,11 +41,10 @@ class Event {
     this._element.addEventListener(`click`, this._onEdit.bind(this, this._data));
   }
 
-  render() {
-    this._element = createEvent(this.template);
-    this.bind();
-    return this._element;
+  unbind() {
+    // Удаление обработчиков
   }
+
 
   update() {
     if (this._state.isEdit) {
@@ -56,15 +52,6 @@ class Event {
     } else {
       return this._element.classList.remove(`trip-point--edit`);
     }
-  }
-
-  unbind() {
-    // Удаление обработчиков
-  }
-
-  unrender() {
-    this.unbind();
-    this._element = null;
   }
 }
 

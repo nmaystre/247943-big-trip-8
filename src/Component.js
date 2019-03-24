@@ -1,9 +1,12 @@
+import {
+  createEvent
+} from './createEvent';
+
 class Component {
   constructor() {
     if (new.target === Component) {
       throw new Error(`Can't instantiate BaseComponent, only concrete one.`);
     }
-
     this._element = null;
     this._state = {};
   }
@@ -16,12 +19,15 @@ class Component {
     throw new Error(`You have to define template.`);
   }
 
-  render() {}
+  render() {
+    this._element = createEvent(this.template);
+    this.bind();
+    return this._element;
+  }
 
   bind() {}
 
   unbind() {}
-
 
   unrender() {
     this.unbind();

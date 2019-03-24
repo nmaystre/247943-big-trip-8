@@ -1,6 +1,3 @@
-import {
-  createEditEvent
-} from './createEditEvent';
 
 import Component from './Component';
 
@@ -113,12 +110,6 @@ class EditEvent extends Component {
                 </section>
               </form>
             </article>`;
-  }
-
-  render() {
-    this._element = createEditEvent(this.template);
-    this.bind();
-    return this._element;
   }
 
   bind() {

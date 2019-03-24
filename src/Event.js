@@ -1,6 +1,4 @@
-import {
-  createEvent
-} from './createEvent';
+
 
 import Component from './Component';
 
@@ -20,7 +18,7 @@ class Event extends Component {
 
   set onEdit(fn) {
     this._onEdit = fn;
-    this._bindedEditedElement = this._onEdit.bind(this);
+    this._bindedEditedElement = this._onEdit.bind(this, this._data);
   }
 
   get template() {
@@ -36,12 +34,6 @@ class Event extends Component {
               ${this._offers}
               </ul>
             </article>`;
-  }
-
-  render() {
-    this._element = createEvent(this.template);
-    this.bind();
-    return this._element;
   }
 
   bind() {

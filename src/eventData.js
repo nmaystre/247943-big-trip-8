@@ -5,45 +5,45 @@ import {
 } from './util.js';
 
 const eventTypeData = [{
-    title: `Taxi`,
-    icon: `🚕`
-  },
-  {
-    title: `Bus`,
-    icon: `🚌`
-  },
-  {
-    title: `Train`,
-    icon: `🚂`
-  },
-  {
-    title: `Ship`,
-    icon: `🛳️`
-  },
-  {
-    title: `Transport`,
-    icon: `🚊`
-  },
-  {
-    title: `Drive`,
-    icon: `🚗`
-  },
-  {
-    title: `Flight`,
-    icon: `✈️`
-  },
-  {
-    title: `Check-in`,
-    icon: `🏨`
-  },
-  {
-    title: `Sightseeing`,
-    icon: `🏛️`
-  },
-  {
-    title: `Restaurant`,
-    icon: `🍴`
-  }
+  title: `Taxi`,
+  icon: `🚕`
+},
+{
+  title: `Bus`,
+  icon: `🚌`
+},
+{
+  title: `Train`,
+  icon: `🚂`
+},
+{
+  title: `Ship`,
+  icon: `🛳️`
+},
+{
+  title: `Transport`,
+  icon: `🚊`
+},
+{
+  title: `Drive`,
+  icon: `🚗`
+},
+{
+  title: `Flight`,
+  icon: `✈️`
+},
+{
+  title: `Check-in`,
+  icon: `🏨`
+},
+{
+  title: `Sightseeing`,
+  icon: `🏛️`
+},
+{
+  title: `Restaurant`,
+  icon: `🍴`
+}
 ];
 
 const eventOffersData = [

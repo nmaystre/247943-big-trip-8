@@ -9,6 +9,7 @@ class EditEvent extends Component {
     this._icon = data.type.icon;
     this._title = data.type.title;
     this._city = data.city;
+    this._cityList = data.cityList;
     this._startTime = data.time.start;
     this._endTime = data.time.end;
     this._price = data.price;
@@ -67,12 +68,7 @@ class EditEvent extends Component {
                   <div class="point__destination-wrap">
                     <label class="point__destination-label" for="destination">${this._title} to</label>
                     <input class="point__destination-input" list="destination-select" id="destination" value="${this._city}" name="destination">
-                    <datalist id="destination-select">
-                      <option value="airport"></option>
-                      <option value="Geneva"></option>
-                      <option value="Chamonix"></option>
-                      <option value="hotel"></option>
-                    </datalist>
+                    <datalist id="destination-select">${this._cityList}</datalist>
                   </div>
                   <label class="point__time">
                     choose time

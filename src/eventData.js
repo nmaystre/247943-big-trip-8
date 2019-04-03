@@ -80,8 +80,11 @@ const eventDescriptionData = [
 const getEventDataType = () => {
   return eventTypeData[Math.floor(getRandomNumber(1, eventTypeData.length))];
 };
-const getEventCityType = () => {
-  return [...eventCityData].join(` `);
+const getEventCity = () => {
+  return [...eventCityData][Math.floor(getRandomNumber(1, [...eventCityData].length))];
+};
+const getEventCityList = () => {
+  return [...eventCityData].map((element) => `<option value="${element}">${element}</option>`).join(``);
 };
 const getEventPicture = () => {
   return `//picsum.photos/100/100?r=${Math.random()}`;
@@ -131,7 +134,8 @@ const getEventTimings = () => {
 
 const eventData = () => ({
   type: getEventDataType(),
-  city: getEventCityType(),
+  city: getEventCity(),
+  cityList: getEventCityList(),
   picture: getEventPicture(),
   offers: getEventOffers(),
   offersEdit: getEditEventOffers(),

@@ -16,6 +16,8 @@ class EditEvent extends Component {
     this._offersEdit = data.offersEdit;
     this._description = data.description;
     this._picture = data.picture;
+
+    this._state = {};
   }
 
   set onSave(fn) {
@@ -27,6 +29,11 @@ class EditEvent extends Component {
   set onReset(fn) {
     this._onReset = fn;
     this._bindedResetedElement = this._onReset.bind(this);
+  }
+
+  _onChangeType() {
+    this._icon = data.type.icon;
+    this._title = data.type.title;
   }
 
   get template() {
@@ -120,6 +127,19 @@ class EditEvent extends Component {
       .removeEventListener(`click`, this._bindedResetedElement);
     this._element.querySelector(`.point__button--save`)
       .removeEventListener(`click`, this._bindedSavedElement);
+  }
+
+  update(data) {
+    this._icon = data.type.icon;
+    this._title = data.type.title;
+    this._city = data.city;
+    this._cityList = data.cityList;
+    this._startTime = data.time.start;
+    this._endTime = data.time.end;
+    this._price = data.price;
+    this._offersEdit = data.offersEdit;
+    this._description = data.description;
+    this._picture = data.picture;
   }
 }
 

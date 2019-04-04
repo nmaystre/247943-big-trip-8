@@ -1,7 +1,6 @@
 
 import Component from './Component';
 
-
 class EditEvent extends Component {
 
   constructor(data) {
@@ -17,13 +16,12 @@ class EditEvent extends Component {
     this._description = data.description;
     this._picture = data.picture;
 
-    this._state = {};
+    this._state.action = null;
   }
 
   set onSave(fn) {
     this._onSave = fn;
     this._bindedSavedElement = this._onSave.bind(this);
-
   }
 
   set onReset(fn) {
@@ -31,9 +29,35 @@ class EditEvent extends Component {
     this._bindedResetedElement = this._onReset.bind(this);
   }
 
-  _onChangeType() {
-    this._icon = data.type.icon;
-    this._title = data.type.title;
+  _partialUpdate() {
+    this._element.innerHTML = this.template;
+  }
+
+  _onChangeAction() {
+    this._state.action = !this._state.action;
+    this.unbind();
+    this._partialUpdate();
+    this.bind();
+  }
+
+  _processForm(editedData) {
+    const entry = {
+      eventTypeData: {
+        type: {
+          title: ``,
+          icon: ``
+        },
+        city: ``,
+        cityList: ``,
+        picture: ``,
+        offers: ``,
+        offersEdit: ``,
+        description: ``,
+        day: ``,
+        time: ``,
+        price: ``,
+      },
+    };
   }
 
   get template() {
@@ -50,13 +74,13 @@ class EditEvent extends Component {
                     <div class="travel-way__select">
                       <div class="travel-way__select-group">
                         <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-taxi" name="travel-way"
-                          value="taxi">
+                          value="taxi" ${this._icon === `taxi` && `checked`}>
                         <label class="travel-way__select-label" for="travel-way-taxi">🚕 taxi</label>
                         <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-bus" name="travel-way"
-                          value="bus">
+                          value="bus" ${this._icon === `bus` && `checked`}>
                         <label class="travel-way__select-label" for="travel-way-bus">🚌 bus</label>
                         <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-train" name="travel-way"
-                          value="train">
+                          value="train" ${this._icon === `train` && `checked`}>
                         <label class="travel-way__select-label" for="travel-way-train">🚂 train</label>
                         <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-flight" name="travel-way"
                           value="train" checked>

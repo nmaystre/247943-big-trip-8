@@ -25,6 +25,7 @@ class EditEvent extends Component {
   set onSave(fn) {
     this._onSave = fn;
     this._bindedSavedElement = this._onSave.bind(this);
+    this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
   }
 
   set onReset(fn) {

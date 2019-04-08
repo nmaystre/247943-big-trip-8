@@ -19,6 +19,7 @@ eventComponent.onEdit = (data) => {
 
   editEventComponent.onSave = (evt) => {
     evt.preventDefault();
+    console.log('dfdf');
     eventComponent.render();
     eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
     editEventComponent.unrender();

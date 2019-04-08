@@ -142,7 +142,8 @@ const eventData = () => ({
   description: getEventDescription(),
   day: `add later`,
   time: getEventTimings(),
-  price: Math.floor(getRandomNumber(0, 100))
+  price: Math.floor(getRandomNumber(0, 100)),
+  favorite: false
 });
 
 export {

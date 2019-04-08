@@ -15,8 +15,11 @@ class EditEvent extends Component {
     this._offersEdit = data.offersEdit;
     this._description = data.description;
     this._picture = data.picture;
+    this._favorite = data.favorite;
 
     this._state.action = null;
+    this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
+    this._onSubmit = null;
   }
 
   set onSave(fn) {
@@ -27,6 +30,20 @@ class EditEvent extends Component {
   set onReset(fn) {
     this._onReset = fn;
     this._bindedResetedElement = this._onReset.bind(this);
+  }
+
+  set onSubmit(fn) {
+    this._onSubmit = fn;
+
+  }
+
+  _onSubmitButtonClick(evt) {
+    evt.preventDefault();
+    const formData = new FormData(this._element.querySelector(`.card__form`));
+    const editedData = this._processForm(formData);
+    console.log(this._processForm(formData));
+    this._onSubmit(editedData);
+    this.update(editedData);
   }
 
   _partialUpdate() {
@@ -42,21 +59,20 @@ class EditEvent extends Component {
 
   _processForm(editedData) {
     const entry = {
-      eventTypeData: {
-        type: {
-          title: ``,
-          icon: ``
-        },
-        city: ``,
-        cityList: ``,
-        picture: ``,
-        offers: ``,
-        offersEdit: ``,
-        description: ``,
-        day: ``,
-        time: ``,
-        price: ``,
+      type: {
+        title: ``,
+        icon: ``
       },
+      city: ``,
+      cityList: ``,
+      picture: ``,
+      offers: ``,
+      offersEdit: ``,
+      description: ``,
+      day: ``,
+      time: ``,
+      price: ``,
+      favorite: false
     };
   }
 

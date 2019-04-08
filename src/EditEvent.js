@@ -34,7 +34,6 @@ class EditEvent extends Component {
 
   set onSubmit(fn) {
     this._onSubmit = fn;
-
   }
 
   _onSubmitButtonClick(evt) {
@@ -42,7 +41,9 @@ class EditEvent extends Component {
     const formData = new FormData(this._element.querySelector(`.card__form`));
     const editedData = this._processForm(formData);
     console.log(this._processForm(formData));
-    this._onSubmit(editedData);
+    if (typeof this._onSubmit === `function`) {
+      this.onSubmit(editedData);
+    }
     this.update(editedData);
   }
 

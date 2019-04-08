@@ -161,6 +161,8 @@ class EditEvent extends Component {
       .addEventListener(`click`, this._bindedResetedElement);
     this._element.querySelector(`.point__button--save`)
       .addEventListener(`click`, this._bindedSavedElement);
+    this._element.querySelector(`.point__button--save`)
+      .addEventListener(`click`, this._onSubmitButtonClick);
   }
 
   unbind() {
@@ -168,6 +170,8 @@ class EditEvent extends Component {
       .removeEventListener(`click`, this._bindedResetedElement);
     this._element.querySelector(`.point__button--save`)
       .removeEventListener(`click`, this._bindedSavedElement);
+    this._element.querySelector(`.point__button--save`)
+      .removeEventListener(`click`, this._onSubmitButtonClick);
   }
 
   update(data) {

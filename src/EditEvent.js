@@ -18,14 +18,15 @@ class EditEvent extends Component {
     this._favorite = data.favorite;
 
     this._state.action = null;
+
     this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
     this._onSubmit = null;
   }
 
   set onSave(fn) {
     this._onSave = fn;
-    this._bindedSavedElement = this._onSave.bind(this);
-    this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
+    // this._bindedSavedElement = this._onSave.bind(this);
+    // this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
   }
 
   set onReset(fn) {
@@ -160,19 +161,19 @@ class EditEvent extends Component {
   bind() {
     this._element.querySelector(`.point__button[type='reset']`)
       .addEventListener(`click`, this._bindedResetedElement);
-    this._element.querySelector(`.point__button--save`)
-      .addEventListener(`click`, this._bindedSavedElement);
-    this._element.querySelector(`.point__button--save`)
-      .addEventListener(`click`, this._onSubmitButtonClick);
+    // this._element.querySelector(`.point__button--save`)
+    //   .addEventListener(`click`, this._bindedSavedElement);
+    this._element.querySelector(`form`)
+      .addEventListener(`submit`, this._onSubmitButtonClick);
   }
 
   unbind() {
     this._element.querySelector(`.point__button[type='reset']`)
       .removeEventListener(`click`, this._bindedResetedElement);
-    this._element.querySelector(`.point__button--save`)
-      .removeEventListener(`click`, this._bindedSavedElement);
-    this._element.querySelector(`.point__button--save`)
-      .removeEventListener(`click`, this._onSubmitButtonClick);
+    // this._element.querySelector(`.point__button--save`)
+    //   .removeEventListener(`click`, this._bindedSavedElement);
+    this._element.querySelector(`form`)
+      .removeEventListener(`clsubmitick`, this._onSubmitButtonClick);
   }
 
   update(data) {

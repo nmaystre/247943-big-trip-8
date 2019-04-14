@@ -40,9 +40,11 @@ class EditEvent extends Component {
 
   _onSubmitButtonClick(evt) {
     evt.preventDefault();
-    const formData = new FormData(this._element.querySelector(`.card__form`));
+    const selectedForm = this._element.querySelector(`form`);
+    const formData = new FormData(selectedForm);
     const editedData = this._processForm(formData);
-    console.log(this._processForm(formData));
+    console.log('editedData', editedData);
+
     if (typeof this._onSubmit === `function`) {
       this.onSubmit(editedData);
     }
@@ -60,7 +62,7 @@ class EditEvent extends Component {
     this.bind();
   }
 
-  _processForm(editedData) {
+  _processForm(newFormData) {
     const entry = {
       type: {
         title: ``,
@@ -69,14 +71,28 @@ class EditEvent extends Component {
       city: ``,
       cityList: ``,
       picture: ``,
-      offers: ``,
+      offers: [],
       offersEdit: ``,
       description: ``,
       day: ``,
-      time: ``,
+      time: {
+        start: ``,
+        end: ``
+      },
       price: ``,
       favorite: false
     };
+
+    const editEventMapper = EditEvent.createMapper(entry);
+    console.log('editEventMapper', editEventMapper);
+
+    for (const pair of newFormData.entries()) {
+      const [property, value] = pair;
+      if (editEventMapper[property]) {
+        editEventMapper[property](value);
+      }
+    }
+    return entry;
   }
 
   get template() {
@@ -102,15 +118,15 @@ class EditEvent extends Component {
                           value="train" ${this._icon === `train` && `checked`}>
                         <label class="travel-way__select-label" for="travel-way-train">🚂 train</label>
                         <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-flight" name="travel-way"
-                          value="train" checked>
+                          value="train" ${this._icon === `flight` && `checked`}>
                         <label class="travel-way__select-label" for="travel-way-flight">✈️ flight</label>
                       </div>
                       <div class="travel-way__select-group">
                         <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-check-in" name="travel-way"
-                          value="check-in">
+                          value="check-in" ${this._icon === `check-in` && `checked`}>
                         <label class="travel-way__select-label" for="travel-way-check-in">🏨 check-in</label>
                         <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-sightseeing" name="travel-way"
-                          value="sight-seeing">
+                          value="sight-seeing" ${this._icon === `sightseeing` && `checked`}>
                         <label class="travel-way__select-label" for="travel-way-sightseeing">🏛 sightseeing</label>
                       </div>
                     </div>
@@ -161,8 +177,6 @@ class EditEvent extends Component {
   bind() {
     this._element.querySelector(`.point__button[type='reset']`)
       .addEventListener(`click`, this._bindedResetedElement);
-    // this._element.querySelector(`.point__button--save`)
-    //   .addEventListener(`click`, this._bindedSavedElement);
     this._element.querySelector(`form`)
       .addEventListener(`submit`, this._onSubmitButtonClick);
   }
@@ -170,8 +184,6 @@ class EditEvent extends Component {
   unbind() {
     this._element.querySelector(`.point__button[type='reset']`)
       .removeEventListener(`click`, this._bindedResetedElement);
-    // this._element.querySelector(`.point__button--save`)
-    //   .removeEventListener(`click`, this._bindedSavedElement);
     this._element.querySelector(`form`)
       .removeEventListener(`clsubmitick`, this._onSubmitButtonClick);
   }
@@ -187,6 +199,42 @@ class EditEvent extends Component {
     this._offersEdit = data.offersEdit;
     this._description = data.description;
     this._picture = data.picture;
+  }
+
+
+  static createMapper(target) {
+    return {
+      'travel-way': (value) => {
+        target.type.icon = value;
+        return target.type.icon;
+      },
+      'title': (value) => {
+        target.type.title = value;
+        return target.type.title;
+      },
+      'destination': (value) => {
+        target.city = value;
+        return target.city;
+      },
+      'time': (value) => {
+        target.time.start = value;
+        return target.city.start;
+      },
+      'price': (value) => {
+        target.price = value;
+        return target.price;
+      },
+      'favorite': (value) => {
+        target.favorite[value] = true;
+        return target.favorite[value];
+      },
+      // 'offers': (value) => {
+      //   target.offers.map((element) => {
+      //     `offer-${element.index}`[value] = true;
+      //   }).push(``);
+      //   return target.offers;
+      // }
+    };
   }
 }
 

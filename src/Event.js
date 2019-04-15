@@ -56,11 +56,6 @@ class Event extends Component {
   }
 
   update(data) {
-    if (this._state.isEdit) {
-      return this._element.classList.add(`trip-point--edit`);
-    } else {
-      return this._element.classList.remove(`trip-point--edit`);
-    }
     this._icon = data.type.icon;
     this._title = data.type.title;
     this._startTime = data.time.start;
@@ -68,7 +63,12 @@ class Event extends Component {
     this._durationTime = data.time.duration;
     this._price = data.price;
     this._offers = data.offers;
-    // this._isTransport = data.type.transport;
+
+    if (this._state.isEdit) {
+      return this._element.classList.add(`trip-point--edit`);
+    } else {
+      return this._element.classList.remove(`trip-point--edit`);
+    }
   }
 }
 

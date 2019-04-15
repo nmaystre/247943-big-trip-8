@@ -1,5 +1,6 @@
 
 import Component from './Component';
+import flatpickr from "flatpickr";
 
 class EditEvent extends Component {
 
@@ -19,14 +20,15 @@ class EditEvent extends Component {
 
     this._state.action = null;
 
+    this._onSave = null;
     this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
-    this._onSubmit = null;
+    // this._onSubmit = null;
   }
 
   set onSave(fn) {
     this._onSave = fn;
     // this._bindedSavedElement = this._onSave.bind(this);
-    // this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
+    this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
   }
 
   set onReset(fn) {
@@ -34,9 +36,9 @@ class EditEvent extends Component {
     this._bindedResetedElement = this._onReset.bind(this);
   }
 
-  set onSubmit(fn) {
-    this._onSubmit = fn;
-  }
+  // set onSubmit(fn) {
+  //   this._onSubmit = fn;
+  // }
 
   _onSubmitButtonClick(evt) {
     evt.preventDefault();
@@ -179,6 +181,10 @@ class EditEvent extends Component {
       .addEventListener(`click`, this._bindedResetedElement);
     this._element.querySelector(`form`)
       .addEventListener(`submit`, this._onSubmitButtonClick);
+
+    // const timeInput = document.querySelector(`input[name='time']`);
+    // console.log(timeInput);
+    // flatpickr(`input[name='time']`, {enableTime: true, noCalendar: true, altInput: true, altFormat: "h:i K", dateFormat: "h:i K"});
   }
 
   unbind() {
@@ -200,7 +206,6 @@ class EditEvent extends Component {
     this._description = data.description;
     this._picture = data.picture;
   }
-
 
   static createMapper(target) {
     return {
@@ -225,15 +230,9 @@ class EditEvent extends Component {
         return target.price;
       },
       'favorite': (value) => {
-        target.favorite[value] = true;
+        target.favorite[value] = value === `on`;
         return target.favorite[value];
-      },
-      // 'offers': (value) => {
-      //   target.offers.map((element) => {
-      //     `offer-${element.index}`[value] = true;
-      //   }).push(``);
-      //   return target.offers;
-      // }
+      }
     };
   }
 }

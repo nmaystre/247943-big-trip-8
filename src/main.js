@@ -17,8 +17,19 @@ const eventComponent = new Event(eventDataGenerated);
 eventComponent.onEdit = (data) => {
   const editEventComponent = new EditEvent(data);
 
-  editEventComponent.onSave = (evt) => {
+  editEventComponent.onSave = (evt, newObject) => {
     evt.preventDefault();
+
+    // замена переменных
+    eventDataGenerated.type.icon = newObject.type.icon;
+    eventDataGenerated.destination = newObject.destination;
+    eventDataGenerated.time.start = newObject.time.start;
+    eventDataGenerated.price = newObject.price;
+    eventDataGenerated.favorite = newObject.favorite;
+    // update
+    eventComponent.update(eventDataGenerated);
+    console.log(eventDataGenerated); // почему-то не срабатывает!
+
     eventComponent.render();
     eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
     editEventComponent.unrender();

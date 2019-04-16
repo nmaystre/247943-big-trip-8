@@ -18,8 +18,6 @@ class Event extends Component {
     // this._isTransport = data.type.transport;
   }
 
-
-
   set onEdit(fn) {
     this._onEdit = fn;
     this._bindedEditedElement = this._onEdit.bind(this, this._data);

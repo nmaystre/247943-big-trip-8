@@ -1,7 +1,6 @@
 import createFilter from './createFilter';
 import Event from './Event';
 import EditEvent from './EditEvent';
-import flatpickr from "flatpickr";
 
 import {
   eventData
@@ -30,7 +29,7 @@ eventComponent.onEdit = (data) => {
     eventDataGenerated.favorite = newObject.favorite;
     // update
     eventComponent.update(eventDataGenerated);
-    console.log(eventDataGenerated); // почему-то не срабатывает!
+    // console.log(eventDataGenerated); // почему-то не срабатывает!
 
     eventComponent.render();
     eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
@@ -45,7 +44,6 @@ eventComponent.onEdit = (data) => {
   editEventComponent.render();
   eventContainer.replaceChild(editEventComponent.element, eventComponent.element);
 
-  flatpickr(`input[name='time']`, {enableTime: true, noCalendar: true, altInput: true, altFormat: `h:m – h:m`, dateFormat: `h:m - h:m`});
 
 };
 

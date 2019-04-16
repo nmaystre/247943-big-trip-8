@@ -28,7 +28,7 @@ class EditEvent extends Component {
   set onSave(fn) {
     this._onSave = fn;
     // this._bindedSavedElement = this._onSave.bind(this);
-    this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
+    // this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
   }
 
   set onReset(fn) {
@@ -45,7 +45,6 @@ class EditEvent extends Component {
     const selectedForm = this._element.querySelector(`form`);
     const formData = new FormData(selectedForm);
     const editedData = this._processForm(formData);
-    console.log('editedData', editedData);
 
     if (typeof this._onSubmit === `function`) {
       this.onSubmit(editedData);
@@ -86,7 +85,6 @@ class EditEvent extends Component {
     };
 
     const editEventMapper = EditEvent.createMapper(entry);
-    console.log('editEventMapper', editEventMapper);
 
     for (const pair of newFormData.entries()) {
       const [property, value] = pair;
@@ -203,7 +201,6 @@ class EditEvent extends Component {
     this._description = data.description;
     this._picture = data.picture;
   }
-
 
   static createMapper(target) {
     return {

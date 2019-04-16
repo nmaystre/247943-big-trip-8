@@ -208,8 +208,8 @@ class EditEvent extends Component {
   static createMapper(target) {
     return {
       'travel-way': (value) => {
-        target.type.icon = value;
-        return target.type.icon;
+        target.type.title = value;
+        return target.type.title;
       },
       'title': (value) => {
         target.type.title = value;

@@ -1,6 +1,8 @@
 import createFilter from './createFilter';
 import Event from './Event';
 import EditEvent from './EditEvent';
+import flatpickr from "flatpickr";
+
 import {
   eventData
 } from './eventData';
@@ -42,6 +44,9 @@ eventComponent.onEdit = (data) => {
   };
   editEventComponent.render();
   eventContainer.replaceChild(editEventComponent.element, eventComponent.element);
+
+  flatpickr(`input[name='time']`, {enableTime: true, noCalendar: true, altInput: true, altFormat: `h:m – h:m`, dateFormat: `h:m - h:m`});
+
 };
 
 eventContainer.appendChild(eventComponent.render());

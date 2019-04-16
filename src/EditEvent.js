@@ -181,10 +181,7 @@ class EditEvent extends Component {
       .addEventListener(`click`, this._bindedResetedElement);
     this._element.querySelector(`form`)
       .addEventListener(`submit`, this._onSubmitButtonClick);
-
-    // const timeInput = document.querySelector(`input[name='time']`);
-    // console.log(timeInput);
-    // flatpickr(`input[name='time']`, {enableTime: true, noCalendar: true, altInput: true, altFormat: "h:i K", dateFormat: "h:i K"});
+    flatpickr(`input[name='time']`, {enableTime: true, noCalendar: true, altInput: true, altFormat: `h:m – h:m`, dateFormat: `h:m - h:m`});
   }
 
   unbind() {
@@ -206,6 +203,7 @@ class EditEvent extends Component {
     this._description = data.description;
     this._picture = data.picture;
   }
+
 
   static createMapper(target) {
     return {
@@ -230,8 +228,8 @@ class EditEvent extends Component {
         return target.price;
       },
       'favorite': (value) => {
-        target.favorite[value] = value === `on`;
-        return target.favorite[value];
+        target.favorite = value === `on`;
+        return target.favorite;
       }
     };
   }

@@ -24,7 +24,6 @@ eventComponent.onEdit = (data) => {
     console.log(newObject);
 
     // замена переменных
-    // применить splice
     eventDataGenerated.type.icon = newObject.type.icon;
     eventDataGenerated.type.title = capitalizeFirstLetter(newObject.type.title);
     eventDataGenerated.destination = newObject.destination;
@@ -33,7 +32,6 @@ eventComponent.onEdit = (data) => {
     eventDataGenerated.favorite = newObject.favorite;
     // update
     eventComponent.update(eventDataGenerated);
-    // console.log(eventDataGenerated); // почему-то не срабатывает!
 
     eventComponent.render();
     eventContainer.replaceChild(eventComponent.element, editEventComponent.element);
@@ -45,6 +43,7 @@ eventComponent.onEdit = (data) => {
     eventContainer.removeChild(editEventComponent.element);
     editEventComponent.unrender();
   };
+
   editEventComponent.render();
   eventContainer.replaceChild(editEventComponent.element, eventComponent.element);
   editEventComponent.initFlatpicr();

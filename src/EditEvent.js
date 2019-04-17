@@ -9,6 +9,7 @@ class EditEvent extends Component {
 
   constructor(data) {
     super();
+    this._type = data.type;
     this._icon = data.type.icon;
     this._title = data.type.title;
     this._city = data.city;
@@ -207,7 +208,7 @@ class EditEvent extends Component {
 
   update(data) {
 
-    this._updateTravelWay(data.type);
+    this._updateTravelWay(this._type);
 
     // this._icon = data.type.icon;
     // this._title = data.type.title;
@@ -225,7 +226,7 @@ class EditEvent extends Component {
     const travelWayText = this._element.querySelector(`.point__destination-label`);
     const travelWayRadio = this._element.querySelector(`#travel-way-${type}`);
 
-    const travelWaySelected = TRAVEL_WAY_TYPES.find(item => item.title === type)
+    const travelWaySelected = TRAVEL_WAY_TYPES.find((item) => item.title === type);
 
     travelWayIcon.textContent = travelWaySelected.icon;
     travelWayText.textContent = travelWaySelected.text;

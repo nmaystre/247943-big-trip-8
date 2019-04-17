@@ -1,6 +1,9 @@
 
 import Component from './Component';
-import flatpickr from "flatpickr";
+import flatpickr from 'flatpickr';
+import * as moment from 'moment';
+import {TRAVEL_WAY_TYPES} from './travelData';
+
 
 class EditEvent extends Component {
 
@@ -10,8 +13,8 @@ class EditEvent extends Component {
     this._title = data.type.title;
     this._city = data.city;
     this._cityList = data.cityList;
-    this._startTime = data.time.start;
-    this._endTime = data.time.end;
+    this._startTime = data.time.hours[0];
+    this._endTime = data.time.hours[1];
     this._price = data.price;
     this._offersEdit = data.offersEdit;
     this._description = data.description;
@@ -21,14 +24,11 @@ class EditEvent extends Component {
     this._state.action = null;
 
     this._onSave = null;
-    this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
-    // this._onSubmit = null;
+    this._onSubmitButtonClick = this._onButtonClick.bind(this);
   }
 
   set onSave(fn) {
     this._onSave = fn;
-    // this._bindedSavedElement = this._onSave.bind(this);
-    // this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
   }
 
   set onReset(fn) {
@@ -36,19 +36,16 @@ class EditEvent extends Component {
     this._bindedResetedElement = this._onReset.bind(this);
   }
 
-  // set onSubmit(fn) {
-  //   this._onSubmit = fn;
-  // }
-
-  _onSubmitButtonClick(evt) {
+  _onButtonClick(evt) {
     evt.preventDefault();
     const selectedForm = this._element.querySelector(`form`);
     const formData = new FormData(selectedForm);
     const editedData = this._processForm(formData);
 
-    if (typeof this._onSubmit === `function`) {
-      this.onSubmit(editedData);
+    if (typeof this._onSave === `function`) {
+      this._onSave(evt, editedData);
     }
+    console.log('editedData', editedData);
     this.update(editedData);
   }
 
@@ -179,27 +176,60 @@ class EditEvent extends Component {
       .addEventListener(`click`, this._bindedResetedElement);
     this._element.querySelector(`form`)
       .addEventListener(`submit`, this._onSubmitButtonClick);
-    flatpickr(`input[name='time']`, {enableTime: true, noCalendar: true, altInput: true, altFormat: `h:m – h:m`, dateFormat: `h:m - h:m`});
+  }
+
+  initFlatpicr() {
+    const dateInput = document.querySelector(`input[name='time']`);
+    flatpickr(dateInput, {
+      enableTime: true,
+      mode: `range`,
+      // eslint-disable-next-line camelcase
+      time_24hr: true,
+      altInput: true,
+      altFormat: `H:i`,
+      dateFormat: `H:i`,
+      defaultDate: [
+        moment(this._startTime).format(`H:mm`),
+        moment(this._endTime).format(`H:mm`)
+      ],
+      locale: {
+        rangeSeparator: ` - `
+      },
+    });
   }
 
   unbind() {
     this._element.querySelector(`.point__button[type='reset']`)
       .removeEventListener(`click`, this._bindedResetedElement);
     this._element.querySelector(`form`)
-      .removeEventListener(`clsubmitick`, this._onSubmitButtonClick);
+      .removeEventListener(`submit`, this._onSubmitButtonClick);
   }
 
   update(data) {
-    this._icon = data.type.icon;
-    this._title = data.type.title;
+
+    this._updateTravelWay(data.type);
+
+    // this._icon = data.type.icon;
+    // this._title = data.type.title;
     this._city = data.city;
-    this._cityList = data.cityList;
     this._startTime = data.time.start;
     this._endTime = data.time.end;
     this._price = data.price;
     this._offersEdit = data.offersEdit;
     this._description = data.description;
     this._picture = data.picture;
+  }
+
+  _updateTravelWay(type) {
+    const travelWayIcon = this._element.querySelector(`.travel-way__label`);
+    const travelWayText = this._element.querySelector(`.point__destination-label`);
+    const travelWayRadio = this._element.querySelector(`#travel-way-${type}`);
+
+    const travelWaySelected = TRAVEL_WAY_TYPES.find(item => item.title === type)
+
+    travelWayIcon.textContent = travelWaySelected.icon;
+    travelWayText.textContent = travelWaySelected.text;
+    travelWayRadio.checked = true;
   }
 
   static createMapper(target) {

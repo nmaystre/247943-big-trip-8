@@ -20,4 +20,8 @@ const getRandomTime = () => {
   return moment().hour(getRandomNumber(0, 24)).minute(getRandomNumber(0, 59));
 };
 
-export {getRandomNumber, getSeveralItems, getRandomTime};
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export {getRandomNumber, getSeveralItems, getRandomTime, capitalizeFirstLetter};

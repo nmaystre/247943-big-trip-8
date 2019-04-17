@@ -1,6 +1,7 @@
 import createFilter from './createFilter';
 import Event from './Event';
 import EditEvent from './EditEvent';
+import {capitalizeFirstLetter} from './util';
 
 import {
   eventData
@@ -20,9 +21,12 @@ eventComponent.onEdit = (data) => {
 
   editEventComponent.onSave = (evt, newObject) => {
     evt.preventDefault();
+    console.log(newObject);
 
     // замена переменных
+    // применить splice
     eventDataGenerated.type.icon = newObject.type.icon;
+    eventDataGenerated.type.title = capitalizeFirstLetter(newObject.type.title);
     eventDataGenerated.destination = newObject.destination;
     eventDataGenerated.time.start = newObject.time.start;
     eventDataGenerated.price = newObject.price;
@@ -43,7 +47,7 @@ eventComponent.onEdit = (data) => {
   };
   editEventComponent.render();
   eventContainer.replaceChild(editEventComponent.element, eventComponent.element);
-
+  editEventComponent.initFlatpicr();
 
 };
 

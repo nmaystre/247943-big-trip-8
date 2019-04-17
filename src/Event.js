@@ -8,8 +8,8 @@ class Event extends Component {
     this._data = data;
     this._icon = data.type.icon;
     this._title = data.type.title;
-    this._startTime = data.time.start;
-    this._endTime = data.time.end;
+    this._startTime = data.time.hours[0];
+    this._endTime = data.time.hours[1];
     this._durationTime = data.time.duration;
     this._price = data.price;
     this._offers = data.offers;
